@@ -13,6 +13,11 @@ cookie_bytes = bytes.fromhex(cookie_hex)
 iv = cookie_bytes[:16]
 cipher = cookie_bytes[16:]
 
+# in AES-CBC: P1 = Dec(C1) ⊕ IV
+# => orig = Dec(C1) ⊕ IV
+# want: target = Dec(C1) ⊕ new_IV
+#  new_IV = IV ⊕ orig ⊕ target
+
 
 orig = b"admin=False;ex"  # 13 bytes
 target = b"admin=True;ex"  # same length
